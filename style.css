@@ -816,7 +816,7 @@ PROJECT PAGE STARTS
     position: absolute !important;
     top: 50% !important;
     transform: translateY(-50%) !important;
-    background: rgba(0, 0, 0, 0.8) !important;
+    background: #DB5461 !important;
     border: none !important;
     color: white !important;
     padding: 10px 20px !important;
