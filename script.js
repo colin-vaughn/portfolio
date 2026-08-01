@@ -86,6 +86,48 @@ function nextPage() {
 }
 
 
+//MOBILE HAMBURGER NAV MENU TOGGLE
+
+document.addEventListener('DOMContentLoaded', () => {
+    const navToggle = document.getElementById('nav-toggle');
+    const navLinks = document.getElementById('nav-links');
+
+    if (navToggle && navLinks) {
+        function closeMobileMenu() {
+            navLinks.classList.remove('mobile-open');
+            navToggle.setAttribute('aria-expanded', 'false');
+            navToggle.innerHTML = '<i class="fa-solid fa-bars"></i>';
+        }
+
+        function openMobileMenu() {
+            navLinks.classList.add('mobile-open');
+            navToggle.setAttribute('aria-expanded', 'true');
+            navToggle.innerHTML = '<i class="fa-solid fa-xmark"></i>';
+        }
+
+        navToggle.addEventListener('click', () => {
+            if (navLinks.classList.contains('mobile-open')) {
+                closeMobileMenu();
+            } else {
+                openMobileMenu();
+            }
+        });
+
+        // Close the dropdown automatically once a page link is tapped
+        navLinks.querySelectorAll('a').forEach((link) => {
+            link.addEventListener('click', closeMobileMenu);
+        });
+
+        // Close if the window is resized back up past the mobile breakpoint
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 900) {
+                closeMobileMenu();
+            }
+        });
+    }
+});
+
+
 //NAVBAR HEADING SHOW/HIDE ON SCROLL FROM HERO SECTION
 
 

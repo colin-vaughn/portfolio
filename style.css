@@ -207,7 +207,6 @@ main > section.active, section.active {
 
 #nav-links a {
     position: relative;
-    border-bottom: 4px solid transparent;
     border-radius: 8px;
 }
 
@@ -248,6 +247,21 @@ main > section.active, section.active {
     font-weight: 300;
     font-size: 24pt;
     color:#DB5461;
+    white-space: nowrap;
+}
+
+/* Hamburger menu toggle button - hidden on desktop, shown on mobile below */
+#nav-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: #DB5461;
+    font-size: 26px;
+    line-height: 1;
+    cursor: pointer;
+    padding: 8px;
+    margin-left: auto;
+    z-index: 10001;
 }
 
 /* Light/dark toggle: a pill switch with a sliding knob, sun/moon icons
@@ -1089,14 +1103,76 @@ footer p {
     .project-row { grid-template-columns: 1fr; }
     .project-header-left, .project-summary-right { padding: 0; margin-bottom: 15px; }
 
-    .drawer-inner { flex-direction: column !important; }
+    .drawer-inner, .subproject-row { flex-direction: column !important; }
     .project-details, .project-image-wrapper { flex: 1 1 100%; padding: 0; }
     .project-image-wrapper { margin-top: 20px; }
 
     .education-card-light { flex-direction: column; }
     .job-row { flex-direction: column; align-items: flex-start; gap: 2px; }
     .job-dates { order: 3; }
-
-    #nav-links { gap: 12px !important; }
-    #nav-links a { font-size: 11pt; padding: 8px 10px; }
 }
+
+@media (max-width: 900px) {
+    .site-navbar, nav {
+        height: 65px !important;
+        padding: 10px 18px !important;
+    }
+
+    /* Shrink the logo + name so they fit on one line in the top-left */
+    #nav-heading {
+        gap: 8px !important;
+        min-width: 0; /* allow flex children to shrink below content size */
+        flex: 1 1 auto;
+    }
+
+    #nav-heading img {
+        width: 34px !important;
+        height: auto !important;
+    }
+
+    #nav-heading h2 {
+        font-size: 13pt;
+    }
+
+    /* Show the hamburger button */
+    #nav-toggle {
+        display: block;
+    }
+
+    /* Collapse the nav links into a full-width dropdown under the bar */
+    #nav-links {
+        margin-left: 0 !important;
+        position: fixed !important;
+        top: 65px;
+        left: 0;
+        width: 100%;
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 0 !important;
+        background-color: var(--nav-bg);
+        backdrop-filter: blur(20px) saturate(180%);
+        -webkit-backdrop-filter: blur(20px) saturate(180%);
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.35s ease;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    #nav-links a {
+        font-size: 13pt;
+        text-align: center;
+        padding: 16px 0;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+        border-radius: 0;
+    }
+
+    #nav-links a::after {
+        display: none; /* the underline hover effect doesn't make sense stacked vertically */
+    }
+}
+    #nav-links.mobile-open {
+        max-height: 400px;
+        background-color: var(--bg-surface);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+    }
+
