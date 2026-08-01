@@ -742,7 +742,7 @@ PROJECT PAGE STARTS
 .carousel-track {
     position: relative !important;
     width: 100% !important;
-    height: 500px !important; 
+    aspect-ratio: 1 / 1;
 }
 
 /* Base state for all slides */
